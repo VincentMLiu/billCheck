@@ -269,6 +269,9 @@ public class ExcelUtils {
             {
             	//如果当天有金额相同的笔数，哈希值+1，作为另一个key输入
             	billingItems.incrementHash();
+            	while(map.get(billingItems)!=null){//如果当天还有金额相同的笔数，哈希值再+1，作为另一个key输入
+            		billingItems.incrementHash();
+            	}
                 map.put(billingItems, 1);
                 continue;
             }
@@ -281,6 +284,9 @@ public class ExcelUtils {
             {
                 if(map.get(billingItems)==2){
                 	billingItems.incrementHash();
+                	while(map.get(billingItems)==2){//如果有重复值，就加hash
+                		billingItems.incrementHash();
+                	}
                 	if(map.get(billingItems)!=null){
                     	map.put(billingItems, 2);
                         continue;
